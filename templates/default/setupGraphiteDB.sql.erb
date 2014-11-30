@@ -1,0 +1,26 @@
+DO
+$body$
+BEGIN
+    IF NOT EXISTS (
+        SELECT *
+        FROM pg_catalog.pg_user
+        WHERE usename = '<%= node['graphite']['postgresUser']%>') THEN
+
+        CREATE USER <%= node['graphite']['postgresUser']%> WITH PASSWORD '<%= node['graphite']['postgresPassword']%>';
+    END IF;
+END
+$body$
+
+DO
+$body$
+BEGIN
+    IF NOT EXISTS (
+        SELECT *
+        FROM pg_catalog.pg_database
+        WHERE datname = '<%= node['graphite']['postgresDBName']%>') THEN
+
+        CREATE DATABASE <%= node['graphite']['postgresDBName']%> WITH OWNER <%= node['graphite']['postgresUser']%>;
+    END IF;
+END
+$body$
+
