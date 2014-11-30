@@ -1,5 +1,4 @@
-DO
-$body$
+DO$$
 BEGIN
     IF NOT EXISTS (
         SELECT *
@@ -8,11 +7,9 @@ BEGIN
 
         CREATE USER <%= node['graphite']['postgresUser']%> WITH PASSWORD '<%= node['graphite']['postgresPassword']%>';
     END IF;
-END
-$body$
+END$$;
 
-DO
-$body$
+DO$$
 BEGIN
     IF NOT EXISTS (
         SELECT *
@@ -21,6 +18,5 @@ BEGIN
 
         CREATE DATABASE <%= node['graphite']['postgresDBName']%> WITH OWNER <%= node['graphite']['postgresUser']%>;
     END IF;
-END
-$body$
+END$$;
 

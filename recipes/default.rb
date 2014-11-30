@@ -14,3 +14,7 @@ end
 execute "psql -f /tmp/setupGraphiteDB.sql" do
     user "postgres"
 end
+
+template "/etc/graphite/local_settings.py" do
+    source "local_settings.py.erb"
+end
