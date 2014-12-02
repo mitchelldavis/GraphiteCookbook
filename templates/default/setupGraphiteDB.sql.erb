@@ -1,4 +1,6 @@
-DO$$
+CREATE EXTENSION dblink;
+
+DO $$
 BEGIN
     IF NOT EXISTS (
         SELECT *
@@ -9,14 +11,14 @@ BEGIN
     END IF;
 END$$;
 
-DO$$
+DO $$
 BEGIN
     IF NOT EXISTS (
         SELECT *
         FROM pg_catalog.pg_database
         WHERE datname = '<%= node['graphite']['postgresDBName']%>') THEN
 
-        CREATE DATABASE <%= node['graphite']['postgresDBName']%> WITH OWNER <%= node['graphite']['postgresUser']%>;
+        PERFORM dblink_exec('dbname=' || current_database(), 'CREATE DATABASE <%= node['graphite']['postgresDBName']%> WITH OWNER <%= node['graphite']['postgresUser']%>');
     END IF;
 END$$;
 

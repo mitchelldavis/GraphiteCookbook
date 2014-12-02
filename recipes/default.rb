@@ -4,6 +4,7 @@ apt_package "vim"
 apt_package "graphite-web"
 apt_package "graphite-carbon"
 apt_package "postgresql"
+apt_package "postgresql-contrib"
 apt_package "libpq-dev"
 apt_package "python-psycopg2"
 
