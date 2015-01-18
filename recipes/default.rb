@@ -22,6 +22,15 @@ template "/etc/graphite/local_settings.py" do
     source "local_settings.py.erb"
 end
 
+template "/etc/graphite/initial_data.json" do
+  source "initial_data.json.erb"
+end
+
+execute "syncdb" do
+  cwd "/etc/graphite"
+  command "graphite-manage syncdb --noinput -v 3"
+end
+
 template "/etc/default/graphite-carbon" do
     source "graphite-carbon.erb"
 end
